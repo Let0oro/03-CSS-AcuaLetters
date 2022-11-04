@@ -1,12 +1,20 @@
 @import url( 'https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
 
 
+:root {
+  --animationWaves: 3s;
+  --animationHeight: 3s;
+  --animationTransform: 3s;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins';
   font-size: 3rem;
+  cursor: default;
+
 }
 
 body {
@@ -31,14 +39,66 @@ h2 {
 }
 
 h2:nth-child(1) {
-  color: transparent ;
+  /* color: white ; */
+  color: transparent;
   -webkit-text-stroke: 2px #03a9f4;
-
+  
 }
-h2:nth-child(2) {
+
+/* Second possibility */
+/* h2:nth-child(1)::before {
+  content: 'Water';
+  position: absolute;
   color: #03a9f4;
   overflow: hidden;
   animation: waves 4s infinite ease-in-out;
+} */
+
+/* Third possibility */
+/* h2:nth-child(2) {
+  color: #03a9f4;
+  overflow: hidden;
+  animation: waves 4s infinite ease-in-out;
+} */
+
+
+/* Four possibility */
+.waterEffect {
+  position: relative;
+  width: 10rem;
+  height: 3rem;
+  background-color: #03a9f4;
+  border-radius: 30px;
+  animation: waves 4s infinite linear;
+
+  transform: translate(0);
+
+  transition: transform var(--animationTransform) linear, height var(--animationHeight) linear;
+
+}
+
+.waterEffect:hover {
+  transform:translate(0, -20% );
+  height: 5rem;
+}
+
+.waterEffect:hover > h2{
+  transform:translate(-50%, -30% );
+}
+
+.waterEffect h2 {
+  font-family: 'Poppins';
+  position: absolute;
+  /* left: 50%;
+  top: 50%; */
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+
+  /* opacity: 0; */
+  
+  -webkit-text-stroke: 2px #333;
+  color: rgb(183, 26, 231);
+  transition: all var(--animationWaves) linear 0s;  
 }
 
 /* https://bennettfeely.com/clippy/ */
@@ -51,4 +111,23 @@ h2:nth-child(2) {
     clip-path: polygon(0 46%, 19% 43%, 35% 48%, 49% 54%, 61% 60%, 75% 56%, 88% 48%, 100% 44%, 100% 100%, 0% 100%);
 
   }
+}
+
+.limit-line {
+  position: absolute;
+  top: 8rem;
+  left: 4rem;
+  font-size: .3rem;
+  color: #ccc;
+  background-color: #ccc;
+  width: 2rem;
+  height: 1px;
+}
+
+p {
+  position: absolute;
+  font-size: .2rem;
+  color: #ccc;
+  top: 8.5rem;
+  left: 4rem;
 }
